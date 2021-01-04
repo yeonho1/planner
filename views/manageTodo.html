@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Main</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" language="javascript">
+            var timerID;
+            function updateData() {
+                $.ajax({url: "getTodo", success: function(result) {
+                    $("#todo").children().children().slice(1).remove();
+                    $("#todo").slice(1).remove();
+                    result.forEach(function(v, i, a) {
+                        $("#todo").append("<tr><td>" + v.name + "</td><td>" + v.icon + "</td><td><progress value='" + v.progress + "' max='100'></progress></td></tr>")
+                    })
+                }})
+                timerID = setTimeout("updateData()", 2000);
+            }
+            $(document).ready(function() {
+                updateData();
+            })
+        </script>
+    </head>
+    <body>
+        <table id="todo" class="table table-dark table-bordered">
+            <tr>
+                <th>Name</th>
+                <th>Icon</th>
+                <th>Progress</th>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -50,6 +50,10 @@ app.get('/getTodo', (req, res) => {
     })
 })
 
+app.get('/manageTodo', (req, res) => {
+    res.render('manageTodo.html');
+})
+
 app.get('/viewTodo', (req, res) => {
     res.render('todoList.html');
 })
