@@ -16,12 +16,15 @@ app.get('/', (req, res) => {
 app.get('/addTodo', (req, res) => {
     name = req.query.name
     icon = req.query.icon
+    progress = req.query.progress || 0
+    pr_max = req.query.progMax || 100
+    console.log(pr_max);
     if (client.exists('todoCount') == 0) {
         client.set('todoCount', 0);
     }
     client.incr('todoCount', (err, id) => {
         var todoName = 'todo_' + id;
-        client.hmset(todoName, 'name', name, 'icon', icon, 'progress', '0');
+        client.hmset(todoName, 'name', name, 'icon', icon, 'progress', progress, 'progressMax', pr_max);
         client.rpush('todoList', todoName);
         console.log('Created ' + todoName);
     })
