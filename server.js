@@ -15,7 +15,6 @@ app.get('/', (req, res) => {
 
 app.get('/addTodo', (req, res) => {
     name = req.query.name
-    icon = req.query.icon
     progress = req.query.progress || 0
     pr_max = req.query.progMax || 100
     console.log(pr_max);
@@ -24,7 +23,7 @@ app.get('/addTodo', (req, res) => {
     }
     client.incr('todoCount', (err, id) => {
         var todoName = 'todo_' + id;
-        client.hmset(todoName, 'name', name, 'icon', icon, 'progress', progress, 'progressMax', pr_max);
+        client.hmset(todoName, 'name', name, 'progress', progress, 'progressMax', pr_max);
         client.rpush('todoList', todoName);
         console.log('Created ' + todoName);
     })

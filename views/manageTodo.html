@@ -12,7 +12,7 @@
                     $("#todo").children().children().slice(1).remove();
                     result.forEach(function(v, i, a) {
                         $("#todo").append("<tr><td>" + v.name + "</td><td>"
-                            + v.icon + "</td><td><progress value='"
+                            + "<progress value='"
                             + v.progress + "' max='" + v.progressMax
                             + "'></progress></td></tr>")
                     })
@@ -37,7 +37,6 @@
                         "name": title,
                         "progress": currPrg,
                         "progMax": maxPrg,
-                        "icon": ""
                     }})
                 })
                 updateData();
@@ -93,7 +92,6 @@
         <table id="todo" class="table table-dark table-bordered">
             <tr>
                 <th>Name</th>
-                <th>Icon</th>
                 <th>Progress</th>
             </tr>
         </table>
