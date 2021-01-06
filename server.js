@@ -29,6 +29,25 @@ app.get('/addTodo', (req, res) => {
     res.send('Success');
 })
 
+app.get('/editTodo', (req, res) => {
+    id = req.query.id
+    name = req.query.name
+    progress = req.query.progress
+    pr_max = req.query.progMax
+    if (id == undefined || name == undefined || progress == undefined || pr_max == undefined) {
+        res.send('ARGUMENT_NULL_ERR');
+        return;
+    }
+    client.exists('todo_' + id, (err, ok) => {
+        if (ok == 1) {
+            client.hmset('todo_' + id, 'name', name, 'progress', progress, 'progressMax', pr_max);
+            res.send('Success');
+        } else (ok == 0) {
+            res.send('TODO_NOT_EXISTS_ERR');
+        }
+    })
+})
+
 app.get('/getTodo', (req, res) => {
     var resList = [];
     client.lrange('todoList', 0, -1, (err, arr) => {
