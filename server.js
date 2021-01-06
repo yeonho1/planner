@@ -17,7 +17,6 @@ app.get('/addTodo', (req, res) => {
     name = req.query.name
     progress = req.query.progress || 0
     pr_max = req.query.progMax || 100
-    console.log(pr_max);
     if (client.exists('todoCount') == 0) {
         client.set('todoCount', 0);
     }
