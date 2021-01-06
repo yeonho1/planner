@@ -51,6 +51,17 @@ app.get('/getTodo', (req, res) => {
     })
 })
 
+app.get('/removeTodo', (req, res) => {
+    var id = req.query.id;
+    var result = client.del('todo_' + id);
+    if (result == 1) {
+        client.lrem('todoList', 1, 'todo_' + id);
+        res.send('Success');
+    } else {
+        res.send('Fail');
+    }
+})
+
 app.get('/manageTodo', (req, res) => {
     res.render('manageTodo.html');
 })
