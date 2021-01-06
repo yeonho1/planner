@@ -25,9 +25,6 @@
                     var title = $("#c_title").val();
                     var currPrg = $("#c_currPrg").val();
                     var maxPrg = $("#c_maxPrg").val();
-                    console.log(title);
-                    console.log(currPrg);
-                    console.log(maxPrg);
                     $.ajax({url: "addTodo", success: function(result) {
                         if (result == "Success") {
                             // success dialog
