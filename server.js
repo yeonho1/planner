@@ -25,8 +25,8 @@ app.get('/addTodo', (req, res) => {
         client.hmset(todoName, 'name', name, 'progress', progress, 'progressMax', pr_max);
         client.rpush('todoList', todoName);
         console.log('Created ' + todoName);
+        res.send('Success');
     })
-    res.send('Success');
 })
 
 app.get('/editTodo', (req, res) => {
